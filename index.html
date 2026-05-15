@@ -16,56 +16,40 @@ header{
 }
 header h1{margin:0;font-size:22px;}
 header input{padding:8px;width:220px;border-radius:5px;border:none;}
+header button{background:#FFD700;border:none;padding:8px 15px;border-radius:5px;cursor:pointer;}
 
 /* HERO */
-.hero{
-  text-align:center;padding:60px;background:#f9f9f9;
-}
+.hero{text-align:center;padding:60px;background:#f9f9f9;}
 .hero h2{font-size:32px;margin-bottom:10px;}
 .hero p{font-size:18px;color:#555;}
-.hero button{
-  background:#FFD700;border:none;padding:14px 30px;
-  cursor:pointer;font-size:16px;border-radius:5px;
-}
+.hero button{background:#FFD700;border:none;padding:14px 30px;cursor:pointer;font-size:16px;border-radius:5px;}
 
 /* PRODUCTS */
-.container{
-  display:flex;flex-wrap:wrap;justify-content:center;
-  padding:20px;gap:20px;
-}
-.card{
-  background:#fff;width:280px;padding:15px;
-  border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);
-  text-align:center;transition:transform 0.2s;
-}
+.container{display:flex;flex-wrap:wrap;justify-content:center;padding:20px;gap:20px;}
+.card{background:#fff;width:280px;padding:15px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);text-align:center;transition:transform 0.2s;}
 .card:hover{transform:translateY(-5px);}
 .card img{width:100%;height:220px;object-fit:cover;border-radius:8px;}
 .card h3{margin:10px 0;font-size:18px;}
 .card p{color:#666;margin:5px 0;}
 
-/* CART */
+/* CART (hidden by default) */
 #cart{
+  display:none; /* hidden initially */
   position:fixed;right:0;top:0;width:340px;height:100%;
   background:#fafafa;padding:20px;overflow:auto;
   box-shadow:-2px 0 10px rgba(0,0,0,0.2);
 }
 #cart h3{margin-top:0;}
-button{
-  width:100%;padding:10px;margin-top:8px;
-  background:#000;color:#fff;border:none;cursor:pointer;
-  border-radius:5px;font-size:15px;
-}
+#closeCart{background:#FFD700;color:#000;margin-bottom:10px;}
+button{width:100%;padding:10px;margin-top:8px;background:#000;color:#fff;border:none;cursor:pointer;border-radius:5px;font-size:15px;}
 
 /* FOOTER */
-footer{
-  background:#000;color:#fff;text-align:center;
-  padding:20px;margin-top:40px;
-}
+footer{background:#000;color:#fff;text-align:center;padding:20px;margin-top:40px;}
 
 /* RESPONSIVE */
 @media(max-width:768px){
   .card{width:90%}
-  #cart{width:100%;position:relative;box-shadow:none}
+  #cart{width:100%;position:fixed;box-shadow:none}
 }
 </style>
 </head>
@@ -74,7 +58,10 @@ footer{
 
 <header>
   <h1>📱 Case Shell</h1>
-  <input id="search" onkeyup="render()" placeholder="Search iPhone...">
+  <div>
+    <input id="search" onkeyup="render()" placeholder="Search iPhone...">
+    <button onclick="toggleCart()">🛒 Cart</button>
+  </div>
 </header>
 
 <section class="hero">
@@ -87,6 +74,7 @@ footer{
 
 <!-- CART -->
 <div id="cart">
+  <button id="closeCart" onclick="toggleCart()">Close Cart ✖</button>
   <h3>🛒 Cart</h3>
   <div id="cartItems"></div>
   <h4 id="total"></h4>
@@ -149,7 +137,6 @@ let products = [
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
 function save(){localStorage.setItem("cart",JSON.stringify(cart));}
 
 /* RENDER PRODUCTS */
@@ -203,7 +190,4 @@ function placeOrder(){
   if(cart.length===0)return alert("Cart empty!");
   let name=document.getElementById("custName").value;
   let phone=document.getElementById("custPhone").value;
-  let address=document.getElementById("custAddress").value;
-  let city=document.getElementById("custCity").value;
-  let payment=document.getElementById("custPayment").value;
-  alert("Order Placed!\nName: "+name+"\nPhone: "+phone+"\nAddress: "+address+", "+city+"\nPayment: "+payment+"\nItems: "+cart.map(c=>
+  let address=document.getElement
