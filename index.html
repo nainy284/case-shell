@@ -16,9 +16,7 @@ header{
   justify-content:space-between;
   align-items:center;
 }
-header input{
-  padding:8px;width:200px;
-}
+header input{padding:8px;width:200px}
 
 /* PRODUCTS */
 .container{
@@ -35,9 +33,9 @@ header input{
   padding:10px;
   border-radius:10px;
   box-shadow:0 0 10px #ccc;
-  transition:transform 0.2s;
+  transition:0.2s;
 }
-.card:hover{transform:scale(1.05)}
+.card:hover{transform:scale(1.03)}
 
 .card img{
   width:100%;
@@ -79,16 +77,15 @@ button{
   overflow:auto;
 }
 
-input,textarea{
+input,textarea,select{
   width:100%;
   padding:8px;
   margin:5px 0;
 }
 
-/* RESPONSIVE */
 @media(max-width:768px){
   .card{width:90%}
-  #cart{width:100%;position:relative;box-shadow:none}
+  #cart{width:100%;position:relative}
 }
 </style>
 </head>
@@ -116,12 +113,14 @@ input,textarea{
   <input id="custPhone" placeholder="Phone">
   <input id="custAddress" placeholder="Address">
   <input id="custCity" placeholder="City">
+
   <select id="custPayment">
     <option>Cash on Delivery</option>
     <option>Credit/Debit Card</option>
     <option>JazzCash</option>
     <option>Easypaisa</option>
   </select>
+
   <button onclick="placeOrder()">Place Order</button>
 </div>
 
@@ -134,9 +133,10 @@ input,textarea{
   <input id="pname" placeholder="Product Name">
   <input id="pcat" placeholder="Category (iPhone 12 etc)">
   <textarea id="pvariants" placeholder='[
-{"model":"iPhone 12 Black","price":999,"image":"iphone12-black.jpg"}
+{"model":"iPhone 12 Black","price":999,"image":"img.jpg"}
 ]'></textarea>
-  <button onclick="addProduct()">Add</button>
+
+  <button onclick="addProduct()">Add Product</button>
 
   <h3>Products</h3>
   <div id="adminList"></div>
@@ -144,41 +144,28 @@ input,textarea{
 
 <script>
 
-/* INIT DATA */
-let products = [
+/* LOAD PRODUCTS */
+let products = JSON.parse(localStorage.getItem("products")) || [
   {name:"iPhone Case",category:"iPhone 12",variants:[
     {model:"12 Black",price:999,image:"iphone12-black.jpg"},
     {model:"12 Blue",price:999,image:"iphone12-blue.jpg"},
-    {model:"12 Pink",price:999,image:"iphone12-pink.jpg"},
-    {model:"12 White",price:999,image:"iphone12-white.jpg"},
-    {model:"12 Green",price:999,image:"iphone12-green.jpg"}
+    {model:"12 Pink",price:999,image:"iphone12-pink.jpg"}
   ]},
   {name:"iPhone Case",category:"iPhone 13",variants:[
     {model:"13 Black",price:999,image:"iphone13-black.jpg"},
-    {model:"13 Blue",price:999,image:"iphone13-blue.jpg"},
-    {model:"13 Pink",price:999,image:"iphone13-pink.jpg"},
-    {model:"13 White",price:999,image:"iphone13-white.jpg"},
-    {model:"13 Green",price:999,image:"iphone13-green.jpg"}
+    {model:"13 Blue",price:999,image:"iphone13-blue.jpg"}
   ]},
   {name:"iPhone Case",category:"iPhone 14",variants:[
-    {model:"14 Black",price:999,image:"iphone14-black.jpg"},
-    {model:"14 Blue",price:999,image:"iphone14-blue.jpg"},
-    {model:"14 Pink",price:999,image:"iphone14-pink.jpg"}
+    {model:"14 Black",price:999,image:"iphone14-black.jpg"}
   ]},
   {name:"iPhone Case",category:"iPhone 15",variants:[
-    {model:"15 Black",price:999,image:"iphone15-black.jpg"},
-    {model:"15 Blue",price:999,image:"iphone15-blue.jpg"},
-    {model:"15 Green",price:999,image:"iphone15-green.jpg"}
+    {model:"15 Black",price:999,image:"iphone15-black.jpg"}
   ]},
   {name:"iPhone Case",category:"iPhone 16",variants:[
-    {model:"16 Black",price:999,image:"iphone16-black.jpg"},
-    {model:"16 Beige",price:999,image:"iphone16-beige.jpg"},
-    {model:"16 Pink",price:999,image:"iphone16-pink.jpg"}
+    {model:"16 Black",price:999,image:"iphone16-black.jpg"}
   ]},
   {name:"iPhone Case",category:"iPhone 17",variants:[
-    {model:"17 Black",price:999,image:"iphone17-black.jpg"},
-    {model:"17 Blue",price:999,image:"iphone17-blue.jpg"},
-    {model:"17 White",price:999,image:"iphone17-white.jpg"}
+    {model:"17 Black",price:999,image:"iphone17-black.jpg"}
   ]}
 ];
 
@@ -189,7 +176,7 @@ function save(){
   localStorage.setItem("cart",JSON.stringify(cart));
 }
 
-/* RENDER */
+/* RENDER PRODUCTS */
 function render(){
   let s=document.getElementById("search").value?.toLowerCase()||"";
   let html="";
@@ -199,13 +186,16 @@ function render(){
       html+=`
       <div class="card">
         <h3>${p.category}</h3>
-        <img id="img${i}" src="${p.variants[0].image}" alt="${p.category}">
+        <img id="img${i}" src="${p.variants[0].image}">
+        
         <select onchange="change(${i},this.value)">
           ${p.variants.map((v,ix)=>
             `<option value="${ix}">${v.model}</option>`
           ).join("")}
         </select>
+
         <p id="price${i}">PKR ${p.variants[0].price}</p>
+
         <button onclick="add(${i})">Add to Cart</button>
       </div>`;
     }
@@ -223,7 +213,7 @@ function change(i,v){
   document.getElementById("price"+i).innerText="PKR "+p.price;
 }
 
-/* CART */
+/* ADD TO CART */
 function add(i){
   let sel=document.querySelectorAll("select")[i];
   let v=products[i].variants[sel.value];
@@ -232,26 +222,43 @@ function add(i){
   renderCart();
 }
 
+/* CART */
 function renderCart(){
   let html="";
   let total=0;
+
   cart.forEach(c=>{
     total+=c.price;
-    html+=`<div><img src="${c.image}" width="40"> ${c.model} - PKR ${c.price}</div>`;
+    html+=`
+      <div>
+        <img src="${c.image}" width="40">
+        ${c.model} - PKR ${c.price}
+      </div>`;
   });
+
   document.getElementById("cartItems").innerHTML=html;
   document.getElementById("total").innerText="Total: PKR "+total;
 }
 
-/* CHECKOUT */
+/* ORDER */
 function placeOrder(){
-  if(cart.length===0)return alert("Cart empty!");
+  if(cart.length===0) return alert("Cart empty!");
+
   let name=document.getElementById("custName").value;
   let phone=document.getElementById("custPhone").value;
   let address=document.getElementById("custAddress").value;
   let city=document.getElementById("custCity").value;
   let payment=document.getElementById("custPayment").value;
-  alert("Order Placed!\nName: "+name+"\nPhone: "+phone+"\nAddress: "+address+", "+city+"\nPayment: "+payment+"\nItems: "+cart.map(c=>c.model).join(", "));
+
+  alert(
+    "ORDER PLACED!\n\n"+
+    "Name: "+name+"\n"+
+    "Phone: "+phone+"\n"+
+    "Address: "+address+", "+city+"\n"+
+    "Payment: "+payment+"\n"+
+    "Items: "+cart.map(c=>c.model).join(", ")
+  );
+
   cart=[];
   save();
   renderCart();
@@ -259,4 +266,37 @@ function placeOrder(){
 
 /* ADMIN */
 function toggleAdmin(){
-  let a=document.getElementById("admin
+  let a=document.getElementById("admin");
+  a.style.display = a.style.display==="block"?"none":"block";
+}
+
+function addProduct(){
+  let name=document.getElementById("pname").value;
+  let cat=document.getElementById("pcat").value;
+  let variants=JSON.parse(document.getElementById("pvariants").value);
+
+  products.push({name,category:cat,variants});
+  save();
+  render();
+}
+
+function renderAdmin(){
+  let html="";
+  products.forEach((p,i)=>{
+    html+=`<p>${p.category} <button onclick="del(${i})">Delete</button></p>`;
+  });
+  document.getElementById("adminList").innerHTML=html;
+}
+
+function del(i){
+  products.splice(i,1);
+  save();
+  render();
+}
+
+render();
+
+</script>
+
+</body>
+</html>
