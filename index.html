@@ -1,302 +1,470 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Case Shell - Complete Store</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+export default function CaseShellStore() {
+  return (
+    <div className="min-h-screen bg-white text-black">
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <div>
+            <h1 className="text-2xl font-black tracking-tight">Case Shell</h1>
+            <p className="text-xs text-gray-500">Premium Phone Cases</p>
+          </div>
 
-<style>
-body {margin:0;font-family:Arial;background:#f5f5f5}
+          <nav className="hidden gap-6 md:flex">
+            <a href="#home" className="hover:text-gray-600">Home</a>
+            <a href="#shop" className="hover:text-gray-600">Shop</a>
+            <a href="#about" className="hover:text-gray-600">About</a>
+            <a href="#contact" className="hover:text-gray-600">Contact</a>
+          </nav>
 
-/* HEADER */
-header{
-  background:#000;color:#fff;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+          <div className="flex items-center gap-3">
+            <button className="rounded-full border px-4 py-2 text-sm hover:bg-black hover:text-white transition">
+              Wishlist
+            </button>
+            <button className="rounded-full bg-black px-5 py-2 text-sm text-white hover:opacity-90 transition">
+              Cart (2)
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section id="home" className="relative overflow-hidden">
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-20 md:grid-cols-2 md:items-center">
+          <div>
+            <span className="rounded-full bg-gray-100 px-4 py-2 text-sm font-medium">
+              New Premium Collection 2026
+            </span>
+
+            <h2 className="mt-6 text-5xl font-black leading-tight md:text-6xl">
+              Stylish Protection For Your Phone
+            </h2>
+
+            <p className="mt-6 max-w-xl text-lg text-gray-600">
+              Discover modern, durable, and premium-quality phone cases designed for iPhone, Samsung, and more.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <button className="rounded-full bg-black px-8 py-4 text-white transition hover:scale-105">
+                Shop Now
+              </button>
+
+              <button className="rounded-full border border-black px-8 py-4 transition hover:bg-black hover:text-white">
+                Explore Collection
+              </button>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-gray-200 blur-3xl"></div>
+
+            <img
+              src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop"
+              alt="Phone Case"
+              className="relative rounded-3xl shadow-2xl"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="bg-gray-50 py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-12 text-center">
+            <h3 className="text-4xl font-black">Shop By Category</h3>
+            <p className="mt-3 text-gray-600">Find the perfect case for your device</p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: 'iPhone Cases',
+                image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=1200&auto=format&fit=crop'
+              },
+              {
+                title: 'Samsung Cases',
+                image: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=1200&auto=format&fit=crop'
+              },
+              {
+                title: 'Accessories',
+                image: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?q=80&w=1200&auto=format&fit=crop'
+              }
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="group overflow-hidden rounded-3xl bg-white shadow-lg transition hover:-translate-y-2 hover:shadow-2xl"
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-80 w-full object-cover transition duration-500 group-hover:scale-110"
+                  />
+                </div>
+
+                <div className="p-6">
+                  <h4 className="text-2xl font-bold">{item.title}</h4>
+                  <button className="mt-4 rounded-full bg-black px-5 py-3 text-white">
+                    Browse
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section id="shop" className="py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+            <div>
+              <h3 className="text-4xl font-black">Featured Products</h3>
+              <p className="mt-2 text-gray-600">Premium best-selling phone cases</p>
+            </div>
+
+            <input
+              type="text"
+              placeholder="Search phone cases..."
+              className="w-full rounded-full border px-6 py-4 outline-none focus:ring-2 focus:ring-black md:w-96"
+            />
+          </div>
+
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                name: 'Carbon Fiber Case',
+                price: '$29',
+                image: 'https://images.unsplash.com/photo-1601593346740-925612772716?q=80&w=1200&auto=format&fit=crop'
+              },
+              {
+                name: 'Matte Black Armor',
+                price: '$35',
+                image: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?q=80&w=1200&auto=format&fit=crop'
+              },
+              {
+                name: 'Luxury Leather Case',
+                price: '$42',
+                image: 'https://images.unsplash.com/photo-1567581935884-3349723552ca?q=80&w=1200&auto=format&fit=crop'
+              },
+              {
+                name: 'Transparent Shockproof',
+                price: '$25',
+                image: 'https://images.unsplash.com/photo-1512054502232-10a0a035d672?q=80&w=1200&auto=format&fit=crop'
+              }
+            ].map((product, index) => (
+              <div
+                key={index}
+                className="group rounded-3xl border bg-white p-4 transition hover:-translate-y-2 hover:shadow-2xl"
+              >
+                <div className="overflow-hidden rounded-2xl">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                <div className="mt-5">
+                  <h4 className="text-xl font-bold">{product.name}</h4>
+                  <div className="mt-3 flex items-center justify-between">
+                    <span className="text-2xl font-black">{product.price}</span>
+                    <button className="rounded-full bg-black px-5 py-2 text-white hover:opacity-90">
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Product Detail Section */}
+      <section className="bg-gray-50 py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2">
+          <div className="grid gap-4">
+            <img
+              src="https://images.unsplash.com/photo-1601593346740-925612772716?q=80&w=1200&auto=format&fit=crop"
+              alt="Case"
+              className="rounded-3xl shadow-lg"
+            />
+
+            <div className="grid grid-cols-3 gap-4">
+              <img src="https://images.unsplash.com/photo-1601593346740-925612772716?q=80&w=1200&auto=format&fit=crop" className="rounded-2xl" />
+              <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?q=80&w=1200&auto=format&fit=crop" className="rounded-2xl" />
+              <img src="https://images.unsplash.com/photo-1567581935884-3349723552ca?q=80&w=1200&auto=format&fit=crop" className="rounded-2xl" />
+            </div>
+          </div>
+
+          <div>
+            <span className="rounded-full bg-black px-4 py-2 text-sm text-white">
+              Best Seller
+            </span>
+
+            <h3 className="mt-6 text-5xl font-black">Carbon Fiber Armor Case</h3>
+
+            <div className="mt-5 flex items-center gap-4">
+              <span className="text-4xl font-black">$29</span>
+              <span className="text-xl text-gray-400 line-through">$45</span>
+            </div>
+
+            <p className="mt-6 text-lg leading-relaxed text-gray-600">
+              Ultra-protective premium phone case with shockproof corners, carbon texture finish, and camera protection.
+            </p>
+
+            <div className="mt-8 flex items-center gap-4">
+              <input
+                type="number"
+                defaultValue={1}
+                className="w-24 rounded-xl border px-4 py-3"
+              />
+
+              <button className="rounded-full bg-black px-8 py-4 text-white hover:opacity-90">
+                Add To Cart
+              </button>
+
+              <button className="rounded-full border border-black px-8 py-4 hover:bg-black hover:text-white">
+                Buy Now
+              </button>
+            </div>
+
+            <div className="mt-10 border-t pt-8">
+              <h4 className="text-2xl font-bold">Customer Reviews</h4>
+
+              <div className="mt-6 space-y-5">
+                <div className="rounded-2xl border p-5">
+                  <p className="font-bold">Ahmed Khan</p>
+                  <p className="mt-2 text-gray-600">
+                    Amazing quality and fast delivery. Highly recommended.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border p-5">
+                  <p className="font-bold">Sarah Ali</p>
+                  <p className="mt-2 text-gray-600">
+                    Premium feel and perfect fit for my iPhone.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cart Section */}
+      <section className="py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <h3 className="text-4xl font-black">Shopping Cart</h3>
+
+          <div className="mt-10 space-y-6">
+            {[1, 2].map((item) => (
+              <div key={item} className="flex flex-col gap-6 rounded-3xl border p-6 md:flex-row md:items-center md:justify-between">
+                <div className="flex items-center gap-5">
+                  <img
+                    src="https://images.unsplash.com/photo-1601593346740-925612772716?q=80&w=1200&auto=format&fit=crop"
+                    className="h-24 w-24 rounded-2xl object-cover"
+                  />
+
+                  <div>
+                    <h4 className="text-xl font-bold">Carbon Fiber Case</h4>
+                    <p className="text-gray-500">iPhone 15 Pro Max</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <input type="number" defaultValue={1} className="w-20 rounded-xl border px-3 py-2" />
+                  <span className="text-xl font-black">$29</span>
+                  <button className="rounded-full border px-4 py-2 hover:bg-black hover:text-white">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 rounded-3xl bg-black p-8 text-white">
+            <div className="flex items-center justify-between">
+              <h4 className="text-3xl font-black">Total</h4>
+              <span className="text-4xl font-black">$58</span>
+            </div>
+
+            <button className="mt-6 w-full rounded-full bg-white py-4 text-lg font-bold text-black hover:opacity-90">
+              Proceed To Checkout
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Checkout */}
+      <section className="bg-gray-50 py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-10 text-center">
+            <h3 className="text-4xl font-black">Secure Checkout</h3>
+            <p className="mt-3 text-gray-600">Fast & secure payment process</p>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div className="rounded-3xl bg-white p-8 shadow-lg">
+              <h4 className="text-2xl font-black">Billing Details</h4>
+
+              <div className="mt-8 grid gap-5">
+                <input type="text" placeholder="Full Name" className="rounded-2xl border px-5 py-4" />
+                <input type="text" placeholder="Phone Number" className="rounded-2xl border px-5 py-4" />
+                <input type="text" placeholder="Address" className="rounded-2xl border px-5 py-4" />
+                <input type="text" placeholder="City" className="rounded-2xl border px-5 py-4" />
+              </div>
+            </div>
+
+            <div className="rounded-3xl bg-white p-8 shadow-lg">
+              <h4 className="text-2xl font-black">Payment Method</h4>
+
+              <div className="mt-8 space-y-5">
+                <div className="rounded-2xl border p-5">
+                  <label className="flex items-center gap-3 font-medium">
+                    <input type="radio" name="payment" defaultChecked />
+                    Credit / Debit Card
+                  </label>
+
+                  <div className="mt-5 grid gap-4">
+                    <input type="text" placeholder="Card Number" className="rounded-xl border px-4 py-3" />
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <input type="text" placeholder="Expiry Date" className="rounded-xl border px-4 py-3" />
+                      <input type="text" placeholder="CVV" className="rounded-xl border px-4 py-3" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border p-5">
+                  <label className="flex items-center gap-3 font-medium">
+                    <input type="radio" name="payment" />
+                    Cash On Delivery
+                  </label>
+                </div>
+
+                <div className="rounded-2xl border p-5">
+                  <label className="flex items-center gap-3 font-medium">
+                    <input type="radio" name="payment" />
+                    JazzCash / Easypaisa
+                  </label>
+                </div>
+
+                <button className="w-full rounded-full bg-black py-4 text-lg font-bold text-white hover:opacity-90">
+                  Place Order
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-12 text-center">
+            <h3 className="text-4xl font-black">What Customers Say</h3>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              'Amazing quality and premium packaging.',
+              'Very fast delivery and excellent support.',
+              'Best phone case store I have ordered from.'
+            ].map((review, index) => (
+              <div key={index} className="rounded-3xl border p-8 shadow-sm hover:shadow-xl transition">
+                <p className="text-lg text-gray-700">“{review}”</p>
+                <div className="mt-5 font-bold">Verified Customer</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Badges */}
+      <section className="bg-black py-16 text-white">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 text-center md:grid-cols-3">
+          <div>
+            <h4 className="text-2xl font-black">Secure Payments</h4>
+            <p className="mt-3 text-gray-300">Protected checkout experience</p>
+          </div>
+
+          <div>
+            <h4 className="text-2xl font-black">Fast Delivery</h4>
+            <p className="mt-3 text-gray-300">Nationwide shipping available</p>
+          </div>
+
+          <div>
+            <h4 className="text-2xl font-black">Quality Guarantee</h4>
+            <p className="mt-3 text-gray-300">Premium quality products only</p>
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="py-20">
+        <div className="mx-auto max-w-5xl px-6 text-center">
+          <h3 className="text-5xl font-black">About Case Shell</h3>
+
+          <p className="mt-8 text-lg leading-relaxed text-gray-600">
+            Case Shell is a premium phone case brand focused on modern design, durability, and customer satisfaction.
+            We provide stylish and protective accessories crafted for daily use.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="bg-gray-50 py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="mb-10 text-center">
+            <h3 className="text-5xl font-black">Contact Us</h3>
+            <p className="mt-3 text-gray-600">We’d love to hear from you</p>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div className="rounded-3xl bg-white p-8 shadow-lg">
+              <div className="grid gap-5">
+                <input type="text" placeholder="Your Name" className="rounded-2xl border px-5 py-4" />
+                <input type="email" placeholder="Email Address" className="rounded-2xl border px-5 py-4" />
+                <textarea rows="5" placeholder="Message" className="rounded-2xl border px-5 py-4"></textarea>
+
+                <button className="rounded-full bg-black py-4 text-lg font-bold text-white hover:opacity-90">
+                  Send Message
+                </button>
+              </div>
+            </div>
+
+            <div className="rounded-3xl bg-black p-8 text-white">
+              <h4 className="text-3xl font-black">Get In Touch</h4>
+
+              <div className="mt-8 space-y-6 text-lg">
+                <p>Email: support@caseshell.com</p>
+                <p>WhatsApp: +92 300 0000000</p>
+                <p>Instagram: @caseshell</p>
+              </div>
+
+              <button className="mt-10 rounded-full bg-white px-8 py-4 text-lg font-bold text-black">
+                Chat On WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t py-10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 md:flex-row">
+          <div>
+            <h4 className="text-2xl font-black">Case Shell</h4>
+            <p className="mt-2 text-gray-500">Premium Phone Case Store</p>
+          </div>
+
+          <div className="flex gap-6 text-gray-600">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
 }
-header input{padding:8px;width:200px}
-
-/* PRODUCTS */
-.container{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  padding:20px;
-}
-
-.card{
-  background:#fff;
-  width:250px;
-  margin:10px;
-  padding:10px;
-  border-radius:10px;
-  box-shadow:0 0 10px #ccc;
-  transition:0.2s;
-}
-.card:hover{transform:scale(1.03)}
-
-.card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-}
-
-/* CART */
-#cart{
-  position:fixed;
-  right:0;
-  top:0;
-  width:320px;
-  height:100%;
-  background:#fff;
-  padding:10px;
-  overflow:auto;
-  box-shadow:-2px 0 10px #aaa;
-}
-
-button{
-  width:100%;
-  padding:8px;
-  margin-top:5px;
-  background:#000;
-  color:#fff;
-  border:none;
-  cursor:pointer;
-}
-
-/* ADMIN */
-#admin{
-  display:none;
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:#fff;
-  padding:20px;
-  overflow:auto;
-}
-
-input,textarea,select{
-  width:100%;
-  padding:8px;
-  margin:5px 0;
-}
-
-@media(max-width:768px){
-  .card{width:90%}
-  #cart{width:100%;position:relative}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <div>📱 Case Shell Store</div>
-  <div>
-    <input id="search" onkeyup="render()" placeholder="Search iPhone...">
-    <button onclick="toggleAdmin()">Admin</button>
-  </div>
-</header>
-
-<div class="container" id="products"></div>
-
-<!-- CART -->
-<div id="cart">
-  <h3>🛒 Cart</h3>
-  <div id="cartItems"></div>
-  <h4 id="total"></h4>
-
-  <h3>Checkout</h3>
-  <input id="custName" placeholder="Name">
-  <input id="custPhone" placeholder="Phone">
-  <input id="custAddress" placeholder="Address">
-  <input id="custCity" placeholder="City">
-
-  <select id="custPayment">
-    <option>Cash on Delivery</option>
-    <option>Credit/Debit Card</option>
-    <option>JazzCash</option>
-    <option>Easypaisa</option>
-  </select>
-
-  <button onclick="placeOrder()">Place Order</button>
-</div>
-
-<!-- ADMIN -->
-<div id="admin">
-  <h2>Admin Panel</h2>
-  <button onclick="toggleAdmin()">Close</button>
-
-  <h3>Add Product</h3>
-  <input id="pname" placeholder="Product Name">
-  <input id="pcat" placeholder="Category (iPhone 12 etc)">
-  <textarea id="pvariants" placeholder='[
-{"model":"iPhone 12 Black","price":999,"image":"img.jpg"}
-]'></textarea>
-
-  <button onclick="addProduct()">Add Product</button>
-
-  <h3>Products</h3>
-  <div id="adminList"></div>
-</div>
-
-<script>
-
-/* LOAD PRODUCTS */
-let products = JSON.parse(localStorage.getItem("products")) || [
-  {name:"iPhone Case",category:"iPhone 12",variants:[
-    {model:"12 Black",price:999,image:"iphone12-black.jpg"},
-    {model:"12 Blue",price:999,image:"iphone12-blue.jpg"},
-    {model:"12 Pink",price:999,image:"iphone12-pink.jpg"}
-  ]},
-  {name:"iPhone Case",category:"iPhone 13",variants:[
-    {model:"13 Black",price:999,image:"iphone13-black.jpg"},
-    {model:"13 Blue",price:999,image:"iphone13-blue.jpg"}
-  ]},
-  {name:"iPhone Case",category:"iPhone 14",variants:[
-    {model:"14 Black",price:999,image:"iphone14-black.jpg"}
-  ]},
-  {name:"iPhone Case",category:"iPhone 15",variants:[
-    {model:"15 Black",price:999,image:"iphone15-black.jpg"}
-  ]},
-  {name:"iPhone Case",category:"iPhone 16",variants:[
-    {model:"16 Black",price:999,image:"iphone16-black.jpg"}
-  ]},
-  {name:"iPhone Case",category:"iPhone 17",variants:[
-    {model:"17 Black",price:999,image:"iphone17-black.jpg"}
-  ]}
-];
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function save(){
-  localStorage.setItem("products",JSON.stringify(products));
-  localStorage.setItem("cart",JSON.stringify(cart));
-}
-
-/* RENDER PRODUCTS */
-function render(){
-  let s=document.getElementById("search").value?.toLowerCase()||"";
-  let html="";
-
-  products.forEach((p,i)=>{
-    if(p.category.toLowerCase().includes(s)){
-      html+=`
-      <div class="card">
-        <h3>${p.category}</h3>
-        <img id="img${i}" src="${p.variants[0].image}">
-        
-        <select onchange="change(${i},this.value)">
-          ${p.variants.map((v,ix)=>
-            `<option value="${ix}">${v.model}</option>`
-          ).join("")}
-        </select>
-
-        <p id="price${i}">PKR ${p.variants[0].price}</p>
-
-        <button onclick="add(${i})">Add to Cart</button>
-      </div>`;
-    }
-  });
-
-  document.getElementById("products").innerHTML=html;
-  renderCart();
-  renderAdmin();
-}
-
-/* VARIANT CHANGE */
-function change(i,v){
-  let p=products[i].variants[v];
-  document.getElementById("img"+i).src=p.image;
-  document.getElementById("price"+i).innerText="PKR "+p.price;
-}
-
-/* ADD TO CART */
-function add(i){
-  let sel=document.querySelectorAll("select")[i];
-  let v=products[i].variants[sel.value];
-  cart.push(v);
-  save();
-  renderCart();
-}
-
-/* CART */
-function renderCart(){
-  let html="";
-  let total=0;
-
-  cart.forEach(c=>{
-    total+=c.price;
-    html+=`
-      <div>
-        <img src="${c.image}" width="40">
-        ${c.model} - PKR ${c.price}
-      </div>`;
-  });
-
-  document.getElementById("cartItems").innerHTML=html;
-  document.getElementById("total").innerText="Total: PKR "+total;
-}
-
-/* ORDER */
-function placeOrder(){
-  if(cart.length===0) return alert("Cart empty!");
-
-  let name=document.getElementById("custName").value;
-  let phone=document.getElementById("custPhone").value;
-  let address=document.getElementById("custAddress").value;
-  let city=document.getElementById("custCity").value;
-  let payment=document.getElementById("custPayment").value;
-
-  alert(
-    "ORDER PLACED!\n\n"+
-    "Name: "+name+"\n"+
-    "Phone: "+phone+"\n"+
-    "Address: "+address+", "+city+"\n"+
-    "Payment: "+payment+"\n"+
-    "Items: "+cart.map(c=>c.model).join(", ")
-  );
-
-  cart=[];
-  save();
-  renderCart();
-}
-
-/* ADMIN */
-function toggleAdmin(){
-  let a=document.getElementById("admin");
-  a.style.display = a.style.display==="block"?"none":"block";
-}
-
-function addProduct(){
-  let name=document.getElementById("pname").value;
-  let cat=document.getElementById("pcat").value;
-  let variants=JSON.parse(document.getElementById("pvariants").value);
-
-  products.push({name,category:cat,variants});
-  save();
-  render();
-}
-
-function renderAdmin(){
-  let html="";
-  products.forEach((p,i)=>{
-    html+=`<p>${p.category} <button onclick="del(${i})">Delete</button></p>`;
-  });
-  document.getElementById("adminList").innerHTML=html;
-}
-
-function del(i){
-  products.splice(i,1);
-  save();
-  render();
-}
-
-render();
-
-</script>
-
-</body>
-</html>
