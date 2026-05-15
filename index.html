@@ -1,3 +1,19 @@
+Husnain 👌  
+Ab main tumhe ek **premium, fully working online store code** deta hoon jo bilkul Shopify‑style lagega. Ismein:  
+
+- Clean header + search bar + cart button  
+- Hero section with tagline + “Shop Now” button  
+- Product grid (iPhone 12–17) with multiple colors (black, pink, light blue, green, beige, white, red, peach)  
+- Cart **hidden by default** → sirf click par open hoga, aur close button se band hoga  
+- Checkout form (Name, Phone, Address, City, Payment options)  
+- Responsive design (mobile + desktop)  
+- Sab cases ki **price PKR 999** fix  
+
+---
+
+## 🛠 Final Professional Store Code
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +50,7 @@ header button{background:#FFD700;border:none;padding:8px 15px;border-radius:5px;
 
 /* CART (hidden by default) */
 #cart{
-  display:none; /* hidden initially */
+  display:none;
   position:fixed;right:0;top:0;width:340px;height:100%;
   background:#fafafa;padding:20px;overflow:auto;
   box-shadow:-2px 0 10px rgba(0,0,0,0.2);
@@ -74,7 +90,7 @@ footer{background:#000;color:#fff;text-align:center;padding:20px;margin-top:40px
 
 <!-- CART -->
 <div id="cart">
-  <button id="closeCart" onclick="toggleCart()">Close Cart ✖</button>
+  <button id="closeCart" onclick="toggleCart()">✖ Close Cart</button>
   <h3>🛒 Cart</h3>
   <div id="cartItems"></div>
   <h4 id="total"></h4>
@@ -186,8 +202,4 @@ function renderCart(){
 }
 
 /* CHECKOUT */
-function placeOrder(){
-  if(cart.length===0)return alert("Cart empty!");
-  let name=document.getElementById("custName").value;
-  let phone=document.getElementById("custPhone").value;
-  let address=document.getElement
+function
