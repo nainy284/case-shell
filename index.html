@@ -2,63 +2,64 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Case Shell - Premium Phone Cases</title>
+<title>Case Shell - Premium Silicone Cases</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body {margin:0;font-family:Arial;background:#f5f5f5}
+body {margin:0;font-family:'Segoe UI',Arial;background:#fff;color:#333;}
 
 /* HEADER */
 header{
   background:#000;color:#fff;
   padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  display:flex;justify-content:space-between;align-items:center;
 }
-header input{padding:8px;width:200px;border-radius:5px;border:none}
+header h1{margin:0;font-size:22px;}
+header input{padding:8px;width:220px;border-radius:5px;border:none;}
 
 /* HERO */
 .hero{
-  text-align:center;
-  padding:40px;
-  background:#eee;
+  text-align:center;padding:60px;background:#f9f9f9;
 }
-.hero h1{margin-bottom:10px}
+.hero h2{font-size:32px;margin-bottom:10px;}
+.hero p{font-size:18px;color:#555;}
 .hero button{
-  background:#FFD700;border:none;padding:12px 25px;
+  background:#FFD700;border:none;padding:14px 30px;
   cursor:pointer;font-size:16px;border-radius:5px;
 }
 
 /* PRODUCTS */
 .container{
   display:flex;flex-wrap:wrap;justify-content:center;
-  padding:20px;
+  padding:20px;gap:20px;
 }
 .card{
-  background:#fff;width:250px;margin:10px;padding:10px;
-  border-radius:10px;box-shadow:0 0 10px #ccc;
-  transition:transform 0.2s;
+  background:#fff;width:280px;padding:15px;
+  border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  text-align:center;transition:transform 0.2s;
 }
-.card:hover{transform:scale(1.05)}
-.card img{width:100%;height:200px;object-fit:cover}
+.card:hover{transform:translateY(-5px);}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:8px;}
+.card h3{margin:10px 0;font-size:18px;}
+.card p{color:#666;margin:5px 0;}
 
 /* CART */
 #cart{
-  position:fixed;right:0;top:0;width:320px;height:100%;
-  background:#fff;padding:10px;overflow:auto;
-  box-shadow:-2px 0 10px #aaa;
+  position:fixed;right:0;top:0;width:340px;height:100%;
+  background:#fafafa;padding:20px;overflow:auto;
+  box-shadow:-2px 0 10px rgba(0,0,0,0.2);
 }
+#cart h3{margin-top:0;}
 button{
-  width:100%;padding:8px;margin-top:5px;
+  width:100%;padding:10px;margin-top:8px;
   background:#000;color:#fff;border:none;cursor:pointer;
-  border-radius:5px;
+  border-radius:5px;font-size:15px;
 }
 
 /* FOOTER */
 footer{
   background:#000;color:#fff;text-align:center;
-  padding:15px;margin-top:30px;
+  padding:20px;margin-top:40px;
 }
 
 /* RESPONSIVE */
@@ -72,14 +73,12 @@ footer{
 <body>
 
 <header>
-  <div>📱 Case Shell Store</div>
-  <div>
-    <input id="search" onkeyup="render()" placeholder="Search iPhone...">
-  </div>
+  <h1>📱 Case Shell</h1>
+  <input id="search" onkeyup="render()" placeholder="Search iPhone...">
 </header>
 
 <section class="hero">
-  <h1>Premium Silicone Cases</h1>
+  <h2>Premium Silicone Cases</h2>
   <p>Style • Protection • Fashion</p>
   <button onclick="document.querySelector('.container').scrollIntoView({behavior:'smooth'})">Shop Now</button>
 </section>
@@ -115,27 +114,27 @@ footer{
 let products = [
   {category:"iPhone 12",variants:[
     {model:"12 Black",price:999,image:"iphone12-black.jpg"},
-    {model:"12 Blue",price:999,image:"iphone12-blue.jpg"},
     {model:"12 Pink",price:999,image:"iphone12-pink.jpg"},
-    {model:"12 White",price:999,image:"iphone12-white.jpg"},
-    {model:"12 Green",price:999,image:"iphone12-green.jpg"}
+    {model:"12 Blue",price:999,image:"iphone12-blue.jpg"},
+    {model:"12 Green",price:999,image:"iphone12-green.jpg"},
+    {model:"12 White",price:999,image:"iphone12-white.jpg"}
   ]},
   {category:"iPhone 13",variants:[
     {model:"13 Black",price:999,image:"iphone13-black.jpg"},
-    {model:"13 Blue",price:999,image:"iphone13-blue.jpg"},
     {model:"13 Pink",price:999,image:"iphone13-pink.jpg"},
-    {model:"13 White",price:999,image:"iphone13-white.jpg"},
-    {model:"13 Green",price:999,image:"iphone13-green.jpg"}
+    {model:"13 Blue",price:999,image:"iphone13-blue.jpg"},
+    {model:"13 Green",price:999,image:"iphone13-green.jpg"},
+    {model:"13 White",price:999,image:"iphone13-white.jpg"}
   ]},
   {category:"iPhone 14",variants:[
     {model:"14 Black",price:999,image:"iphone14-black.jpg"},
-    {model:"14 Blue",price:999,image:"iphone14-blue.jpg"},
-    {model:"14 Pink",price:999,image:"iphone14-pink.jpg"}
+    {model:"14 Pink",price:999,image:"iphone14-pink.jpg"},
+    {model:"14 Blue",price:999,image:"iphone14-blue.jpg"}
   ]},
   {category:"iPhone 15",variants:[
     {model:"15 Black",price:999,image:"iphone15-black.jpg"},
-    {model:"15 Blue",price:999,image:"iphone15-blue.jpg"},
-    {model:"15 Green",price:999,image:"iphone15-green.jpg"}
+    {model:"15 Green",price:999,image:"iphone15-green.jpg"},
+    {model:"15 Blue",price:999,image:"iphone15-blue.jpg"}
   ]},
   {category:"iPhone 16",variants:[
     {model:"16 Black",price:999,image:"iphone16-black.jpg"},
@@ -151,9 +150,7 @@ let products = [
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function save(){
-  localStorage.setItem("cart",JSON.stringify(cart));
-}
+function save(){localStorage.setItem("cart",JSON.stringify(cart));}
 
 /* RENDER PRODUCTS */
 function render(){
@@ -190,15 +187,11 @@ function change(i,v){
 function add(i){
   let sel=document.querySelectorAll("select")[i];
   let v=products[i].variants[sel.value];
-  cart.push(v);
-  save();
-  renderCart();
+  cart.push(v);save();renderCart();
 }
-
 function renderCart(){
   let html="";let total=0;
-  cart.forEach(c=>{
-    total+=c.price;
+  cart.forEach(c=>{total+=c.price;
     html+=`<div><img src="${c.image}" width="40"> ${c.model} - PKR ${c.price}</div>`;
   });
   document.getElementById("cartItems").innerHTML=html;
@@ -213,11 +206,4 @@ function placeOrder(){
   let address=document.getElementById("custAddress").value;
   let city=document.getElementById("custCity").value;
   let payment=document.getElementById("custPayment").value;
-  alert("Order Placed!\nName: "+name+"\nPhone: "+phone+"\nAddress: "+address+", "+city+"\nPayment: "+payment+"\nItems: "+cart.map(c=>c.model).join(", "));
-  cart=[];save();renderCart();
-}
-
-render();
-</script>
-</body>
-</html>
+  alert("Order Placed!\nName: "+name+"\nPhone: "+phone+"\nAddress: "+address+", "+city+"\nPayment: "+payment+"\nItems: "+cart.map(c=>
