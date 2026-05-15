@@ -1,469 +1,245 @@
 export default function CaseShellStore() {
+  const products = [
+    {
+      id: 1,
+      name: 'Black Silicone Case',
+      model: 'iPhone 15 Pro Max',
+      price: 999,
+      image: 'https://images.unsplash.com/photo-1601593346740-925612772716?q=80&w=1200&auto=format&fit=crop',
+      colors: ['Black', 'White', 'Blue']
+    },
+    {
+      id: 2,
+      name: 'Pink Matte Case',
+      model: 'iPhone 14 Pro',
+      price: 999,
+      image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop',
+      colors: ['Pink', 'Cream']
+    },
+    {
+      id: 3,
+      name: 'Luxury Camera Guard Case',
+      model: 'iPhone 13 Pro Max',
+      price: 999,
+      image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=1200&auto=format&fit=crop',
+      colors: ['Green', 'Black']
+    }
+  ]
+
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="bg-white text-black min-h-screen">
       {/* Navbar */}
-      <header className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div>
-            <h1 className="text-2xl font-black tracking-tight">Case Shell</h1>
-            <p className="text-xs text-gray-500">Premium Phone Cases</p>
-          </div>
+      <nav className="flex justify-between items-center px-6 py-5 border-b sticky top-0 bg-white z-50">
+        <h1 className="text-3xl font-bold tracking-widest">
+          CASE SHELL
+        </h1>
 
-          <nav className="hidden gap-6 md:flex">
-            <a href="#home" className="hover:text-gray-600">Home</a>
-            <a href="#shop" className="hover:text-gray-600">Shop</a>
-            <a href="#about" className="hover:text-gray-600">About</a>
-            <a href="#contact" className="hover:text-gray-600">Contact</a>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <button className="rounded-full border px-4 py-2 text-sm hover:bg-black hover:text-white transition">
-              Wishlist
-            </button>
-            <button className="rounded-full bg-black px-5 py-2 text-sm text-white hover:opacity-90 transition">
-              Cart (2)
-            </button>
-          </div>
+        <div className="flex gap-6 text-sm md:text-base font-medium">
+          <a href="#home">Home</a>
+          <a href="#shop">Shop</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
         </div>
-      </header>
+      </nav>
 
       {/* Hero */}
-      <section id="home" className="relative overflow-hidden">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-20 md:grid-cols-2 md:items-center">
-          <div>
-            <span className="rounded-full bg-gray-100 px-4 py-2 text-sm font-medium">
-              New Premium Collection 2026
-            </span>
+      <section
+        id="home"
+        className="grid md:grid-cols-2 gap-10 items-center px-6 md:px-16 py-20 bg-gray-50"
+      >
+        <div>
+          <h2 className="text-5xl md:text-7xl font-bold leading-tight">
+            Premium iPhone Cases In Pakistan
+          </h2>
 
-            <h2 className="mt-6 text-5xl font-black leading-tight md:text-6xl">
-              Stylish Protection For Your Phone
-            </h2>
+          <p className="mt-6 text-gray-600 text-lg">
+            Stylish protection for every iPhone model.
+            Fast delivery all over Pakistan.
+          </p>
 
-            <p className="mt-6 max-w-xl text-lg text-gray-600">
-              Discover modern, durable, and premium-quality phone cases designed for iPhone, Samsung, and more.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <button className="rounded-full bg-black px-8 py-4 text-white transition hover:scale-105">
-                Shop Now
-              </button>
-
-              <button className="rounded-full border border-black px-8 py-4 transition hover:bg-black hover:text-white">
-                Explore Collection
-              </button>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-gray-200 blur-3xl"></div>
-
-            <img
-              src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop"
-              alt="Phone Case"
-              className="relative rounded-3xl shadow-2xl"
-            />
-          </div>
+          <button className="mt-8 bg-black text-white px-8 py-4 rounded-2xl hover:scale-105 transition-all">
+            Shop Now
+          </button>
         </div>
+
+        <img
+          src="https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?q=80&w=1200&auto=format&fit=crop"
+          className="rounded-3xl shadow-2xl"
+        />
       </section>
 
-      {/* Categories */}
-      <section className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12 text-center">
-            <h3 className="text-4xl font-black">Shop By Category</h3>
-            <p className="mt-3 text-gray-600">Find the perfect case for your device</p>
-          </div>
+      {/* Products */}
+      <section id="shop" className="px-6 md:px-16 py-20">
+        <h2 className="text-5xl font-bold text-center mb-14">
+          iPhone Cases
+        </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: 'iPhone Cases',
-                image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=1200&auto=format&fit=crop'
-              },
-              {
-                title: 'Samsung Cases',
-                image: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=1200&auto=format&fit=crop'
-              },
-              {
-                title: 'Accessories',
-                image: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?q=80&w=1200&auto=format&fit=crop'
-              }
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="group overflow-hidden rounded-3xl bg-white shadow-lg transition hover:-translate-y-2 hover:shadow-2xl"
-              >
-                <div className="overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-80 w-full object-cover transition duration-500 group-hover:scale-110"
-                  />
-                </div>
-
-                <div className="p-6">
-                  <h4 className="text-2xl font-bold">{item.title}</h4>
-                  <button className="mt-4 rounded-full bg-black px-5 py-3 text-white">
-                    Browse
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section id="shop" className="py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-            <div>
-              <h3 className="text-4xl font-black">Featured Products</h3>
-              <p className="mt-2 text-gray-600">Premium best-selling phone cases</p>
-            </div>
-
-            <input
-              type="text"
-              placeholder="Search phone cases..."
-              className="w-full rounded-full border px-6 py-4 outline-none focus:ring-2 focus:ring-black md:w-96"
-            />
-          </div>
-
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                name: 'Carbon Fiber Case',
-                price: '$29',
-                image: 'https://images.unsplash.com/photo-1601593346740-925612772716?q=80&w=1200&auto=format&fit=crop'
-              },
-              {
-                name: 'Matte Black Armor',
-                price: '$35',
-                image: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?q=80&w=1200&auto=format&fit=crop'
-              },
-              {
-                name: 'Luxury Leather Case',
-                price: '$42',
-                image: 'https://images.unsplash.com/photo-1567581935884-3349723552ca?q=80&w=1200&auto=format&fit=crop'
-              },
-              {
-                name: 'Transparent Shockproof',
-                price: '$25',
-                image: 'https://images.unsplash.com/photo-1512054502232-10a0a035d672?q=80&w=1200&auto=format&fit=crop'
-              }
-            ].map((product, index) => (
-              <div
-                key={index}
-                className="group rounded-3xl border bg-white p-4 transition hover:-translate-y-2 hover:shadow-2xl"
-              >
-                <div className="overflow-hidden rounded-2xl">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
-                  />
-                </div>
-
-                <div className="mt-5">
-                  <h4 className="text-xl font-bold">{product.name}</h4>
-                  <div className="mt-3 flex items-center justify-between">
-                    <span className="text-2xl font-black">{product.price}</span>
-                    <button className="rounded-full bg-black px-5 py-2 text-white hover:opacity-90">
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Product Detail Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2">
-          <div className="grid gap-4">
-            <img
-              src="https://images.unsplash.com/photo-1601593346740-925612772716?q=80&w=1200&auto=format&fit=crop"
-              alt="Case"
-              className="rounded-3xl shadow-lg"
-            />
-
-            <div className="grid grid-cols-3 gap-4">
-              <img src="https://images.unsplash.com/photo-1601593346740-925612772716?q=80&w=1200&auto=format&fit=crop" className="rounded-2xl" />
-              <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?q=80&w=1200&auto=format&fit=crop" className="rounded-2xl" />
-              <img src="https://images.unsplash.com/photo-1567581935884-3349723552ca?q=80&w=1200&auto=format&fit=crop" className="rounded-2xl" />
-            </div>
-          </div>
-
-          <div>
-            <span className="rounded-full bg-black px-4 py-2 text-sm text-white">
-              Best Seller
-            </span>
-
-            <h3 className="mt-6 text-5xl font-black">Carbon Fiber Armor Case</h3>
-
-            <div className="mt-5 flex items-center gap-4">
-              <span className="text-4xl font-black">$29</span>
-              <span className="text-xl text-gray-400 line-through">$45</span>
-            </div>
-
-            <p className="mt-6 text-lg leading-relaxed text-gray-600">
-              Ultra-protective premium phone case with shockproof corners, carbon texture finish, and camera protection.
-            </p>
-
-            <div className="mt-8 flex items-center gap-4">
-              <input
-                type="number"
-                defaultValue={1}
-                className="w-24 rounded-xl border px-4 py-3"
+        <div className="grid md:grid-cols-3 gap-10">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white border rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all"
+            >
+              <img
+                src={product.image}
+                className="w-full h-[350px] object-cover"
               />
 
-              <button className="rounded-full bg-black px-8 py-4 text-white hover:opacity-90">
-                Add To Cart
-              </button>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold">
+                  {product.name}
+                </h3>
 
-              <button className="rounded-full border border-black px-8 py-4 hover:bg-black hover:text-white">
-                Buy Now
-              </button>
-            </div>
+                <p className="text-gray-500 mt-2">
+                  {product.model}
+                </p>
 
-            <div className="mt-10 border-t pt-8">
-              <h4 className="text-2xl font-bold">Customer Reviews</h4>
-
-              <div className="mt-6 space-y-5">
-                <div className="rounded-2xl border p-5">
-                  <p className="font-bold">Ahmed Khan</p>
-                  <p className="mt-2 text-gray-600">
-                    Amazing quality and fast delivery. Highly recommended.
-                  </p>
+                <div className="flex gap-2 mt-4 flex-wrap">
+                  {product.colors.map((color) => (
+                    <span
+                      key={color}
+                      className="border px-3 py-1 rounded-full text-sm"
+                    >
+                      {color}
+                    </span>
+                  ))}
                 </div>
 
-                <div className="rounded-2xl border p-5">
-                  <p className="font-bold">Sarah Ali</p>
-                  <p className="mt-2 text-gray-600">
-                    Premium feel and perfect fit for my iPhone.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                <div className="flex justify-between items-center mt-6">
+                  <span className="text-3xl font-bold">
+                    PKR {product.price}
+                  </span>
 
-      {/* Cart Section */}
-      <section className="py-20">
-        <div className="mx-auto max-w-5xl px-6">
-          <h3 className="text-4xl font-black">Shopping Cart</h3>
-
-          <div className="mt-10 space-y-6">
-            {[1, 2].map((item) => (
-              <div key={item} className="flex flex-col gap-6 rounded-3xl border p-6 md:flex-row md:items-center md:justify-between">
-                <div className="flex items-center gap-5">
-                  <img
-                    src="https://images.unsplash.com/photo-1601593346740-925612772716?q=80&w=1200&auto=format&fit=crop"
-                    className="h-24 w-24 rounded-2xl object-cover"
-                  />
-
-                  <div>
-                    <h4 className="text-xl font-bold">Carbon Fiber Case</h4>
-                    <p className="text-gray-500">iPhone 15 Pro Max</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <input type="number" defaultValue={1} className="w-20 rounded-xl border px-3 py-2" />
-                  <span className="text-xl font-black">$29</span>
-                  <button className="rounded-full border px-4 py-2 hover:bg-black hover:text-white">
-                    Remove
+                  <button className="bg-black text-white px-5 py-3 rounded-xl">
+                    Add To Cart
                   </button>
                 </div>
               </div>
-            ))}
-          </div>
-
-          <div className="mt-10 rounded-3xl bg-black p-8 text-white">
-            <div className="flex items-center justify-between">
-              <h4 className="text-3xl font-black">Total</h4>
-              <span className="text-4xl font-black">$58</span>
             </div>
-
-            <button className="mt-6 w-full rounded-full bg-white py-4 text-lg font-bold text-black hover:opacity-90">
-              Proceed To Checkout
-            </button>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* Checkout */}
-      <section className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 text-center">
-            <h3 className="text-4xl font-black">Secure Checkout</h3>
-            <p className="mt-3 text-gray-600">Fast & secure payment process</p>
-          </div>
-
-          <div className="grid gap-10 lg:grid-cols-2">
-            <div className="rounded-3xl bg-white p-8 shadow-lg">
-              <h4 className="text-2xl font-black">Billing Details</h4>
-
-              <div className="mt-8 grid gap-5">
-                <input type="text" placeholder="Full Name" className="rounded-2xl border px-5 py-4" />
-                <input type="text" placeholder="Phone Number" className="rounded-2xl border px-5 py-4" />
-                <input type="text" placeholder="Address" className="rounded-2xl border px-5 py-4" />
-                <input type="text" placeholder="City" className="rounded-2xl border px-5 py-4" />
-              </div>
-            </div>
-
-            <div className="rounded-3xl bg-white p-8 shadow-lg">
-              <h4 className="text-2xl font-black">Payment Method</h4>
-
-              <div className="mt-8 space-y-5">
-                <div className="rounded-2xl border p-5">
-                  <label className="flex items-center gap-3 font-medium">
-                    <input type="radio" name="payment" defaultChecked />
-                    Credit / Debit Card
-                  </label>
-
-                  <div className="mt-5 grid gap-4">
-                    <input type="text" placeholder="Card Number" className="rounded-xl border px-4 py-3" />
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <input type="text" placeholder="Expiry Date" className="rounded-xl border px-4 py-3" />
-                      <input type="text" placeholder="CVV" className="rounded-xl border px-4 py-3" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border p-5">
-                  <label className="flex items-center gap-3 font-medium">
-                    <input type="radio" name="payment" />
-                    Cash On Delivery
-                  </label>
-                </div>
-
-                <div className="rounded-2xl border p-5">
-                  <label className="flex items-center gap-3 font-medium">
-                    <input type="radio" name="payment" />
-                    JazzCash / Easypaisa
-                  </label>
-                </div>
-
-                <button className="w-full rounded-full bg-black py-4 text-lg font-bold text-white hover:opacity-90">
-                  Place Order
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12 text-center">
-            <h3 className="text-4xl font-black">What Customers Say</h3>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              'Amazing quality and premium packaging.',
-              'Very fast delivery and excellent support.',
-              'Best phone case store I have ordered from.'
-            ].map((review, index) => (
-              <div key={index} className="rounded-3xl border p-8 shadow-sm hover:shadow-xl transition">
-                <p className="text-lg text-gray-700">“{review}”</p>
-                <div className="mt-5 font-bold">Verified Customer</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Badges */}
-      <section className="bg-black py-16 text-white">
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 text-center md:grid-cols-3">
+      {/* Trust Section */}
+      <section className="bg-black text-white py-20 px-6 md:px-16">
+        <div className="grid md:grid-cols-3 gap-10 text-center">
           <div>
-            <h4 className="text-2xl font-black">Secure Payments</h4>
-            <p className="mt-3 text-gray-300">Protected checkout experience</p>
+            <h3 className="text-2xl font-bold">
+              Secure Payments
+            </h3>
+            <p className="mt-3 text-gray-300">
+              Stripe, JazzCash & Easypaisa Ready
+            </p>
           </div>
 
           <div>
-            <h4 className="text-2xl font-black">Fast Delivery</h4>
-            <p className="mt-3 text-gray-300">Nationwide shipping available</p>
+            <h3 className="text-2xl font-bold">
+              Fast Delivery
+            </h3>
+            <p className="mt-3 text-gray-300">
+              Shipping all over Pakistan
+            </p>
           </div>
 
           <div>
-            <h4 className="text-2xl font-black">Quality Guarantee</h4>
-            <p className="mt-3 text-gray-300">Premium quality products only</p>
+            <h3 className="text-2xl font-bold">
+              Premium Quality
+            </h3>
+            <p className="mt-3 text-gray-300">
+              High quality silicone & luxury cases
+            </p>
           </div>
         </div>
       </section>
 
       {/* About */}
-      <section id="about" className="py-20">
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          <h3 className="text-5xl font-black">About Case Shell</h3>
+      <section id="about" className="px-6 md:px-16 py-20 bg-gray-50">
+        <h2 className="text-5xl font-bold mb-8">
+          About Case Shell
+        </h2>
 
-          <p className="mt-8 text-lg leading-relaxed text-gray-600">
-            Case Shell is a premium phone case brand focused on modern design, durability, and customer satisfaction.
-            We provide stylish and protective accessories crafted for daily use.
-          </p>
+        <p className="text-lg text-gray-700 leading-8 max-w-4xl">
+          Case Shell is a premium Pakistan-based iPhone case brand.
+          We provide stylish and durable iPhone cases for every model
+          including iPhone 12, 13, 14, 15 and 16 series.
+          Our goal is to deliver premium protection with modern design.
+        </p>
+      </section>
+
+      {/* Checkout */}
+      <section className="px-6 md:px-16 py-20">
+        <h2 className="text-5xl font-bold text-center mb-12">
+          Checkout
+        </h2>
+
+        <div className="max-w-3xl mx-auto space-y-5">
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="w-full border p-4 rounded-2xl"
+          />
+
+          <input
+            type="text"
+            placeholder="Phone Number"
+            className="w-full border p-4 rounded-2xl"
+          />
+
+          <input
+            type="text"
+            placeholder="Address"
+            className="w-full border p-4 rounded-2xl"
+          />
+
+          <input
+            type="text"
+            placeholder="City"
+            className="w-full border p-4 rounded-2xl"
+          />
+
+          <select className="w-full border p-4 rounded-2xl">
+            <option>Cash On Delivery</option>
+            <option>JazzCash</option>
+            <option>Easypaisa</option>
+            <option>Stripe Card Payment</option>
+          </select>
+
+          <button className="w-full bg-black text-white py-5 rounded-2xl text-xl font-semibold hover:opacity-90">
+            Place Order
+          </button>
         </div>
       </section>
 
       {/* Contact */}
-      <section id="contact" className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="mb-10 text-center">
-            <h3 className="text-5xl font-black">Contact Us</h3>
-            <p className="mt-3 text-gray-600">We’d love to hear from you</p>
-          </div>
+      <section id="contact" className="bg-gray-100 px-6 md:px-16 py-20">
+        <h2 className="text-5xl font-bold mb-10 text-center">
+          Contact Us
+        </h2>
 
-          <div className="grid gap-10 lg:grid-cols-2">
-            <div className="rounded-3xl bg-white p-8 shadow-lg">
-              <div className="grid gap-5">
-                <input type="text" placeholder="Your Name" className="rounded-2xl border px-5 py-4" />
-                <input type="email" placeholder="Email Address" className="rounded-2xl border px-5 py-4" />
-                <textarea rows="5" placeholder="Message" className="rounded-2xl border px-5 py-4"></textarea>
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-xl mb-4">
+            WhatsApp: +92 323 9038622
+          </p>
 
-                <button className="rounded-full bg-black py-4 text-lg font-bold text-white hover:opacity-90">
-                  Send Message
-                </button>
-              </div>
-            </div>
+          <p className="text-xl mb-8">
+            Email: naink2148@gmail.com
+          </p>
 
-            <div className="rounded-3xl bg-black p-8 text-white">
-              <h4 className="text-3xl font-black">Get In Touch</h4>
-
-              <div className="mt-8 space-y-6 text-lg">
-                <p>Email: support@caseshell.com</p>
-                <p>WhatsApp: +92 300 0000000</p>
-                <p>Instagram: @caseshell</p>
-              </div>
-
-              <button className="mt-10 rounded-full bg-white px-8 py-4 text-lg font-bold text-black">
-                Chat On WhatsApp
-              </button>
-            </div>
-          </div>
+          <a
+            href="https://wa.me/923239038622"
+            target="_blank"
+            className="inline-block bg-green-500 text-white px-8 py-4 rounded-2xl text-lg"
+          >
+            Chat On WhatsApp
+          </a>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 md:flex-row">
-          <div>
-            <h4 className="text-2xl font-black">Case Shell</h4>
-            <p className="mt-2 text-gray-500">Premium Phone Case Store</p>
-          </div>
-
-          <div className="flex gap-6 text-gray-600">
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">TikTok</a>
-          </div>
-        </div>
+      <footer className="bg-black text-white text-center py-8">
+        <p>
+          © 2025 Case Shell Pakistan. All Rights Reserved.
+        </p>
       </footer>
     </div>
   )
