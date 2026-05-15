@@ -1,62 +1,223 @@
-<div className="bg-white text-black min-h-screen font-sans">
-      {/* HEADER */}
-      <header className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md border-b z-50">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
-          <h1 className="text-3xl font-black tracking-[6px]">
-            CASE SHELL
-          </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case Shell - Premium Phone Cases</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-          <nav className="hidden md:flex gap-10 font-medium">
-            <a href="#home" className="hover:text-gray-500">Home</a>
-            <a href="#shop" className="hover:text-gray-500">Shop</a>
-            <a href="#about" className="hover:text-gray-500">About</a>
-            <a href="#contact" className="hover:text-gray-500">Contact</a>
-          </nav>
+<style>
+body {margin:0;font-family:Arial;background:#f5f5f5}
 
-          <button className="bg-black text-white px-6 py-3 rounded-full text-sm hover:scale-105 transition-all">
-            Cart (0)
-          </button>
-        </div>
-      </header>
+/* HEADER */
+header{
+  background:#000;color:#fff;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+header input{padding:8px;width:200px;border-radius:5px;border:none}
 
-      {/* HERO */}
-      <section
-        id="home"
-        className="pt-40 pb-24 px-6 md:px-16 bg-gradient-to-b from-gray-50 to-white"
-      >
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <p className="uppercase tracking-[5px] text-gray-500 text-sm mb-5">
-              Premium iPhone Cases Pakistan
-            </p>
+/* HERO */
+.hero{
+  text-align:center;
+  padding:40px;
+  background:#eee;
+}
+.hero h1{margin-bottom:10px}
+.hero button{
+  background:#FFD700;border:none;padding:12px 25px;
+  cursor:pointer;font-size:16px;border-radius:5px;
+}
 
-            <h2 className="text-6xl md:text-8xl font-black leading-[0.95]">
-              Protect Your
-              <span className="block text-gray-400">
-                iPhone
-              </span>
-            </h2>
+/* PRODUCTS */
+.container{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  padding:20px;
+}
+.card{
+  background:#fff;width:250px;margin:10px;padding:10px;
+  border-radius:10px;box-shadow:0 0 10px #ccc;
+  transition:transform 0.2s;
+}
+.card:hover{transform:scale(1.05)}
+.card img{width:100%;height:200px;object-fit:cover}
 
-            <p className="mt-8 text-lg text-gray-600 max-w-xl leading-8">
-              Luxury silicone and camera protection cases for iPhone 12,
-              13, 14, 15 and 16 series.
-              Fast delivery all over Pakistan.
-            </p>
+/* CART */
+#cart{
+  position:fixed;right:0;top:0;width:320px;height:100%;
+  background:#fff;padding:10px;overflow:auto;
+  box-shadow:-2px 0 10px #aaa;
+}
+button{
+  width:100%;padding:8px;margin-top:5px;
+  background:#000;color:#fff;border:none;cursor:pointer;
+  border-radius:5px;
+}
 
-            <div className="flex gap-5 mt-10 flex-wrap">
-              <button className="bg-black text-white px-10 py-5 rounded-full text-lg hover:scale-105 transition-all shadow-xl">
-                Shop Now
-              </button>
+/* FOOTER */
+footer{
+  background:#000;color:#fff;text-align:center;
+  padding:15px;margin-top:30px;
+}
 
-              <button className="border border-black px-10 py-5 rounded-full text-lg hover:bg-black hover:text-white transition-all">
-                Explore Collection
-              </button>
-            </div>
-          </div>
+/* RESPONSIVE */
+@media(max-width:768px){
+  .card{width:90%}
+  #cart{width:100%;position:relative;box-shadow:none}
+}
+</style>
+</head>
 
-          <div className="relative">
-            <div className="absolute inset-0 bg-black/5 rounded-[40px] blur-3xl"></div>
+<body>
 
-            <img
-              src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?q=80&w=1200&auto=format&fit=crop"
-              className="relative rounded-[40px] shadow-2xl w-ful
+<header>
+  <div>📱 Case Shell Store</div>
+  <div>
+    <input id="search" onkeyup="render()" placeholder="Search iPhone...">
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Premium Silicone Cases</h1>
+  <p>Style • Protection • Fashion</p>
+  <button onclick="document.querySelector('.container').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+</section>
+
+<div class="container" id="products"></div>
+
+<!-- CART -->
+<div id="cart">
+  <h3>🛒 Cart</h3>
+  <div id="cartItems"></div>
+  <h4 id="total"></h4>
+
+  <h3>Checkout</h3>
+  <input id="custName" placeholder="Full Name">
+  <input id="custPhone" placeholder="Phone Number">
+  <input id="custAddress" placeholder="Address">
+  <input id="custCity" placeholder="City">
+  <select id="custPayment">
+    <option>Cash on Delivery</option>
+    <option>Credit/Debit Card</option>
+    <option>JazzCash</option>
+    <option>Easypaisa</option>
+  </select>
+  <button onclick="placeOrder()">Place Order</button>
+</div>
+
+<footer>
+  <p>© 2026 Case Shell | Email: <a href="mailto:naink2148@gmail.com">naink2148@gmail.com</a> | Phone: <a href="tel:03239028622">03239028622</a></p>
+</footer>
+
+<script>
+/* PRODUCTS DATA */
+let products = [
+  {category:"iPhone 12",variants:[
+    {model:"12 Black",price:999,image:"iphone12-black.jpg"},
+    {model:"12 Blue",price:999,image:"iphone12-blue.jpg"},
+    {model:"12 Pink",price:999,image:"iphone12-pink.jpg"},
+    {model:"12 White",price:999,image:"iphone12-white.jpg"},
+    {model:"12 Green",price:999,image:"iphone12-green.jpg"}
+  ]},
+  {category:"iPhone 13",variants:[
+    {model:"13 Black",price:999,image:"iphone13-black.jpg"},
+    {model:"13 Blue",price:999,image:"iphone13-blue.jpg"},
+    {model:"13 Pink",price:999,image:"iphone13-pink.jpg"},
+    {model:"13 White",price:999,image:"iphone13-white.jpg"},
+    {model:"13 Green",price:999,image:"iphone13-green.jpg"}
+  ]},
+  {category:"iPhone 14",variants:[
+    {model:"14 Black",price:999,image:"iphone14-black.jpg"},
+    {model:"14 Blue",price:999,image:"iphone14-blue.jpg"},
+    {model:"14 Pink",price:999,image:"iphone14-pink.jpg"}
+  ]},
+  {category:"iPhone 15",variants:[
+    {model:"15 Black",price:999,image:"iphone15-black.jpg"},
+    {model:"15 Blue",price:999,image:"iphone15-blue.jpg"},
+    {model:"15 Green",price:999,image:"iphone15-green.jpg"}
+  ]},
+  {category:"iPhone 16",variants:[
+    {model:"16 Black",price:999,image:"iphone16-black.jpg"},
+    {model:"16 Beige",price:999,image:"iphone16-beige.jpg"},
+    {model:"16 Pink",price:999,image:"iphone16-pink.jpg"}
+  ]},
+  {category:"iPhone 17",variants:[
+    {model:"17 Black",price:999,image:"iphone17-black.jpg"},
+    {model:"17 Blue",price:999,image:"iphone17-blue.jpg"},
+    {model:"17 White",price:999,image:"iphone17-white.jpg"}
+  ]}
+];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function save(){
+  localStorage.setItem("cart",JSON.stringify(cart));
+}
+
+/* RENDER PRODUCTS */
+function render(){
+  let s=document.getElementById("search").value?.toLowerCase()||"";
+  let html="";
+  products.forEach((p,i)=>{
+    if(p.category.toLowerCase().includes(s)){
+      html+=`
+      <div class="card">
+        <h3>${p.category}</h3>
+        <img id="img${i}" src="${p.variants[0].image}" alt="${p.category}">
+        <select onchange="change(${i},this.value)">
+          ${p.variants.map((v,ix)=>
+            `<option value="${ix}">${v.model}</option>`
+          ).join("")}
+        </select>
+        <p id="price${i}">PKR ${p.variants[0].price}</p>
+        <button onclick="add(${i})">Add to Cart</button>
+      </div>`;
+    }
+  });
+  document.getElementById("products").innerHTML=html;
+  renderCart();
+}
+
+/* CHANGE VARIANT */
+function change(i,v){
+  let p=products[i].variants[v];
+  document.getElementById("img"+i).src=p.image;
+  document.getElementById("price"+i).innerText="PKR "+p.price;
+}
+
+/* CART */
+function add(i){
+  let sel=document.querySelectorAll("select")[i];
+  let v=products[i].variants[sel.value];
+  cart.push(v);
+  save();
+  renderCart();
+}
+
+function renderCart(){
+  let html="";let total=0;
+  cart.forEach(c=>{
+    total+=c.price;
+    html+=`<div><img src="${c.image}" width="40"> ${c.model} - PKR ${c.price}</div>`;
+  });
+  document.getElementById("cartItems").innerHTML=html;
+  document.getElementById("total").innerText="Total: PKR "+total;
+}
+
+/* CHECKOUT */
+function placeOrder(){
+  if(cart.length===0)return alert("Cart empty!");
+  let name=document.getElementById("custName").value;
+  let phone=document.getElementById("custPhone").value;
+  let address=document.getElementById("custAddress").value;
+  let city=document.getElementById("custCity").value;
+  let payment=document.getElementById("custPayment").value;
+  alert("Order Placed!\nName: "+name+"\nPhone: "+phone+"\nAddress: "+address+", "+city+"\nPayment: "+payment+"\nItems: "+cart.map(c=>c.model).join(", "));
+  cart=[];save();renderCart();
+}
+
+render();
+</script>
+</body>
+</html>
