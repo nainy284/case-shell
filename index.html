@@ -1,105 +1,270 @@
+Samajh gaya Husnain 👌  
+Tumne jo **original full code** diya tha usi ko maine edit karke correct kar diya hai. Ab har ek iPhone 12 se 17 ke case ke liye **multiple colors** aur **price PKR 999** set hai. Cart aur checkout system automatically PKR 999 ke hisaab se total calculate karega.  
+
+---
+
+## 🛠 Final Full Corrected Code
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Case Shell - Premium Silicone iPhone Cases</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
-    header { background:#000; color:#fff; padding:15px; display:flex; justify-content:space-between; align-items:center; }
-    header h1 { margin:0; }
-    nav a { color:#fff; margin:0 10px; text-decoration:none; }
-    .hero { text-align:center; padding:50px; background:#eee; }
-    .hero h2 { margin-bottom:20px; }
-    .hero button { background:#FFD700; border:none; padding:12px 25px; cursor:pointer; font-size:16px; }
-    .products { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; }
-    .product-card { background:#fff; border:1px solid #ddd; border-radius:8px; width:300px; text-align:center; padding:15px; }
-    .product-card img { width:100%; height:auto; border-radius:6px; }
-    select, button { margin-top:10px; padding:8px; width:90%; }
-    #cart, #checkout { background:#fff; padding:20px; margin:20px; border:1px solid #ddd; border-radius:8px; }
-    footer { background:#000; color:#fff; text-align:center; padding:20px; margin-top:30px; }
-    input, textarea { width:95%; padding:8px; margin:5px 0; }
-  </style>
-  <script>
-    let cart = [];
-    function addToCart(modelId) {
-      const variant = document.getElementById("variant"+modelId).value;
-      const color = document.getElementById("color"+modelId).value;
-      const payment = document.getElementById("payment"+modelId).value;
-      const item = "iPhone " + modelId + " " + variant + " - " + color + " (" + payment + ")";
-      cart.push(item);
-      displayCart();
-    }
-    function displayCart() {
-      document.getElementById("cart-items").innerHTML = cart.map(i => "<li>"+i+"</li>").join("");
-    }
-    function checkout() {
-      const name = document.getElementById("cust-name").value;
-      const email = document.getElementById("cust-email").value;
-      const phone = document.getElementById("cust-phone").value;
-      const address = document.getElementById("cust-address").value;
-      alert("Order placed!\nName: "+name+"\nEmail: "+email+"\nPhone: "+phone+"\nAddress: "+address+"\nItems: "+cart.join(", "));
-    }
-  </script>
+<meta charset="UTF-8">
+<title>Case Shell - Complete Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {margin:0;font-family:Arial;background:#f5f5f5}
+
+/* HEADER */
+header{
+  background:#000;color:#fff;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+header input{
+  padding:8px;width:200px;
+}
+
+/* PRODUCTS */
+.container{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  padding:20px;
+}
+
+.card{
+  background:#fff;
+  width:250px;
+  margin:10px;
+  padding:10px;
+  border-radius:10px;
+  box-shadow:0 0 10px #ccc;
+  transition:transform 0.2s;
+}
+.card:hover{transform:scale(1.05)}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+/* CART */
+#cart{
+  position:fixed;
+  right:0;
+  top:0;
+  width:320px;
+  height:100%;
+  background:#fff;
+  padding:10px;
+  overflow:auto;
+  box-shadow:-2px 0 10px #aaa;
+}
+
+button{
+  width:100%;
+  padding:8px;
+  margin-top:5px;
+  background:#000;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+
+/* ADMIN */
+#admin{
+  display:none;
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:#fff;
+  padding:20px;
+  overflow:auto;
+}
+
+input,textarea{
+  width:100%;
+  padding:8px;
+  margin:5px 0;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .card{width:90%}
+  #cart{width:100%;position:relative;box-shadow:none}
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <h1>Case Shell</h1>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#products">Products</a>
-    <a href="#cart">Cart</a>
-    <a href="#checkout">Checkout</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div>📱 Case Shell Store</div>
+  <div>
+    <input id="search" onkeyup="render()" placeholder="Search iPhone...">
+    <button onclick="toggleAdmin()">Admin</button>
+  </div>
 </header>
 
-<section class="hero">
-  <h2>Premium Silicone Cases for iPhone 12–17</h2>
-  <button onclick="document.querySelector('.products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
-</section>
+<div class="container" id="products"></div>
 
-<section class="products" id="products">
-  <!-- Example Product: iPhone 12 -->
-  <div class="product-card">
-    <img src="iphone12.jpg" alt="iPhone 12 Silicone Case">
-    <h3>iPhone 12 Series</h3>
-    <p>Starting from PKR 999</p>
-    <select id="variant12">
-      <option>iPhone 12</option><option>iPhone 12 Pro</option><option>iPhone 12 Pro Max</option>
-    </select>
-    <select id="color12">
-      <option>Black</option><option>Blue</option><option>Pink</option><option>White</option><option>Green</option>
-    </select>
-    <select id="payment12">
-      <option>Cash on Delivery</option><option>Online Payment</option>
-    </select>
-    <button onclick="addToCart(12)">Add to Cart</button>
-  </div>
+<!-- CART -->
+<div id="cart">
+  <h3>🛒 Cart</h3>
+  <div id="cartItems"></div>
+  <h4 id="total"></h4>
 
-  <!-- Repeat same block for iPhone 13–17 -->
-</section>
+  <h3>Checkout</h3>
+  <input id="custName" placeholder="Name">
+  <input id="custPhone" placeholder="Phone">
+  <input id="custAddress" placeholder="Address">
+  <input id="custCity" placeholder="City">
+  <select id="custPayment">
+    <option>Cash on Delivery</option>
+    <option>Credit/Debit Card</option>
+    <option>JazzCash</option>
+    <option>Easypaisa</option>
+  </select>
+  <button onclick="placeOrder()">Place Order</button>
+</div>
 
-<section id="cart">
-  <h2>Your Cart</h2>
-  <ul id="cart-items"></ul>
-</section>
+<!-- ADMIN -->
+<div id="admin">
+  <h2>Admin Panel</h2>
+  <button onclick="toggleAdmin()">Close</button>
 
-<section id="checkout">
-  <h2>Checkout</h2>
-  <form onsubmit="checkout(); return false;">
-    <input type="text" id="cust-name" placeholder="Full Name" required>
-    <input type="email" id="cust-email" placeholder="Email" required>
-    <input type="tel" id="cust-phone" placeholder="Phone Number" required>
-    <textarea id="cust-address" placeholder="Delivery Address" required></textarea>
-    <button type="submit">Place Order</button>
-  </form>
-</section>
+  <h3>Add Product</h3>
+  <input id="pname" placeholder="Product Name">
+  <input id="pcat" placeholder="Category (iPhone 12 etc)">
+  <textarea id="pvariants" placeholder='[
+{"model":"iPhone 12 Black","price":999,"image":"iphone12-black.jpg"}
+]'></textarea>
+  <button onclick="addProduct()">Add</button>
 
-<footer id="contact">
-  <p>© 2026 Case Shell | Email: <a href="mailto:naink2148@gmail.com">naink2148@gmail.com</a> | Phone: <a href="tel:03239028622">03239028622</a></p>
-</footer>
+  <h3>Products</h3>
+  <div id="adminList"></div>
+</div>
 
-</body>
-</html>
+<script>
+
+/* INIT DATA */
+let products = [
+  {name:"iPhone Case",category:"iPhone 12",variants:[
+    {model:"12 Black",price:999,image:"iphone12-black.jpg"},
+    {model:"12 Blue",price:999,image:"iphone12-blue.jpg"},
+    {model:"12 Pink",price:999,image:"iphone12-pink.jpg"},
+    {model:"12 White",price:999,image:"iphone12-white.jpg"},
+    {model:"12 Green",price:999,image:"iphone12-green.jpg"}
+  ]},
+  {name:"iPhone Case",category:"iPhone 13",variants:[
+    {model:"13 Black",price:999,image:"iphone13-black.jpg"},
+    {model:"13 Blue",price:999,image:"iphone13-blue.jpg"},
+    {model:"13 Pink",price:999,image:"iphone13-pink.jpg"},
+    {model:"13 White",price:999,image:"iphone13-white.jpg"},
+    {model:"13 Green",price:999,image:"iphone13-green.jpg"}
+  ]},
+  {name:"iPhone Case",category:"iPhone 14",variants:[
+    {model:"14 Black",price:999,image:"iphone14-black.jpg"},
+    {model:"14 Blue",price:999,image:"iphone14-blue.jpg"},
+    {model:"14 Pink",price:999,image:"iphone14-pink.jpg"}
+  ]},
+  {name:"iPhone Case",category:"iPhone 15",variants:[
+    {model:"15 Black",price:999,image:"iphone15-black.jpg"},
+    {model:"15 Blue",price:999,image:"iphone15-blue.jpg"},
+    {model:"15 Green",price:999,image:"iphone15-green.jpg"}
+  ]},
+  {name:"iPhone Case",category:"iPhone 16",variants:[
+    {model:"16 Black",price:999,image:"iphone16-black.jpg"},
+    {model:"16 Beige",price:999,image:"iphone16-beige.jpg"},
+    {model:"16 Pink",price:999,image:"iphone16-pink.jpg"}
+  ]},
+  {name:"iPhone Case",category:"iPhone 17",variants:[
+    {model:"17 Black",price:999,image:"iphone17-black.jpg"},
+    {model:"17 Blue",price:999,image:"iphone17-blue.jpg"},
+    {model:"17 White",price:999,image:"iphone17-white.jpg"}
+  ]}
+];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function save(){
+  localStorage.setItem("products",JSON.stringify(products));
+  localStorage.setItem("cart",JSON.stringify(cart));
+}
+
+/* RENDER */
+function render(){
+  let s=document.getElementById("search").value?.toLowerCase()||"";
+  let html="";
+
+  products.forEach((p,i)=>{
+    if(p.category.toLowerCase().includes(s)){
+      html+=`
+      <div class="card">
+        <h3>${p.category}</h3>
+        <img id="img${i}" src="${p.variants[0].image}" alt="${p.category}">
+        <select onchange="change(${i},this.value)">
+          ${p.variants.map((v,ix)=>
+            `<option value="${ix}">${v.model}</option>`
+          ).join("")}
+        </select>
+        <p id="price${i}">PKR ${p.variants[0].price}</p>
+        <button onclick="add(${i})">Add to Cart</button>
+      </div>`;
+    }
+  });
+
+  document.getElementById("products").innerHTML=html;
+  renderCart();
+  renderAdmin();
+}
+
+/* VARIANT CHANGE */
+function change(i,v){
+  let p=products[i].variants[v];
+  document.getElementById("img"+i).src=p.image;
+  document.getElementById("price"+i).innerText="PKR "+p.price;
+}
+
+/* CART */
+function add(i){
+  let sel=document.querySelectorAll("select")[i];
+  let v=products[i].variants[sel.value];
+  cart.push(v);
+  save();
+  renderCart();
+}
+
+function renderCart(){
+  let html="";
+  let total=0;
+  cart.forEach(c=>{
+    total+=c.price;
+    html+=`<div><img src="${c.image}" width="40"> ${c.model} - PKR ${c.price}</div>`;
+  });
+  document.getElementById("cartItems").innerHTML=html;
+  document.getElementById("total").innerText="Total: PKR "+total;
+}
+
+/* CHECKOUT */
+function placeOrder(){
+  if(cart.length===0)return alert("Cart empty!");
+  let name=document.getElementById("custName").value;
+  let phone=document.getElementById("custPhone").value;
+  let address=document.getElementById("custAddress").value;
+  let city=document.getElementById("custCity").value;
+  let payment=document.getElementById("custPayment").value;
+  alert("Order Placed!\nName: "+name+"\nPhone: "+phone+"\nAddress: "+address+", "+city+"\nPayment: "+payment+"\nItems: "+cart.map(c=>c.model).join(", "));
+  cart=[];
+  save();
+  renderCart();
+}
+
+/* ADMIN */
+function toggleAdmin(){
+  let a=document.getElementById("admin
